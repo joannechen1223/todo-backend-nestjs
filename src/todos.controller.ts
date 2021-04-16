@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Delete, Req } from '@nestjs/common';
+import { Controller, Get, Post, Delete, Req, Param } from '@nestjs/common';
 import { Request } from 'express';
 import { TodosService } from './todos.service';
 import { Todo } from './model/todo.model'
@@ -12,6 +12,11 @@ export class TodosController {
     @Get()
     getTodos(): any[] {
         return this.todosService.getAll();
+    }
+
+    @Get(':id')
+    getOneTodo(@Param('id') id: number): Todo {
+        return this.todosService.getById(id)
     }
 
     @Post()

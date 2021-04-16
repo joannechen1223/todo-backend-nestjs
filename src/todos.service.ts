@@ -10,6 +10,15 @@ export class TodosService {
     return this.todos;
   }
 
+  getById(id: number): Todo {
+    for (let todo of this.todos) {
+        if (todo.id == id) {
+            return todo
+        }
+    }
+    return null;
+  }
+
   add(todo: Todo): Todo {
     todo.setId(this.idCounter);
     this.idCounter += 1;
