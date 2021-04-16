@@ -16,4 +16,8 @@ export class TodosService {
     this.todos.push(todo);
     return todo;
   }
+
+  deleteAll() {
+      this.todos = [];
+  }
 }
