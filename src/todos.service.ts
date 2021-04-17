@@ -12,9 +12,9 @@ export class TodosService {
 
   getById(id: number): Todo {
     for (let todo of this.todos) {
-        if (todo.id == id) {
-            return todo
-        }
+      if (todo.id == id) {
+        return todo
+      }
     }
     return null;
   }
@@ -27,6 +27,23 @@ export class TodosService {
   }
 
   deleteAll() {
-      this.todos = [];
+    this.todos = [];
+  }
+
+  updateById(id: number, title: string, completed: boolean): Todo {
+    let ret: Todo = null;
+    for (let todo of this.todos) {
+      if (todo.id == id) {
+        ret = todo;
+        break;
+      }
+    }
+    if (title) {
+      ret.title = title;
+    }
+    if (completed) {
+      ret.completed = completed;
+    }
+    return ret;
   }
 }
