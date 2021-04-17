@@ -12,7 +12,7 @@ export class TodosService {
 
   getById(id: number): Todo {
     for (let todo of this.todos) {
-      if (todo.id == id) {
+      if (todo.id === id) {
         return todo
       }
     }
@@ -30,20 +30,19 @@ export class TodosService {
     this.todos = [];
   }
 
+  deleteById(id: number) {
+    let todoToBeDeleted = this.getById(id);
+    this.todos = this.todos.filter(todo => todo !== todoToBeDeleted);
+  }
+
   updateById(id: number, title: string, completed: boolean): Todo {
-    let ret: Todo = null;
-    for (let todo of this.todos) {
-      if (todo.id == id) {
-        ret = todo;
-        break;
-      }
-    }
+    let todo: Todo = this.getById(id);
     if (title) {
-      ret.title = title;
+      todo.title = title;
     }
     if (completed) {
-      ret.completed = completed;
+      todo.completed = completed;
     }
-    return ret;
+    return todo;
   }
 }

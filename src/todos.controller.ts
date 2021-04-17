@@ -4,6 +4,7 @@ import {
   Post,
   Delete,
   Patch,
+  Body,
   Req,
   Param,
 } from '@nestjs/common';
@@ -21,24 +22,29 @@ export class TodosController {
   }
 
   @Get(':id')
-  getOneTodo(@Param('id') id: number): Todo {
-    return this.todosService.getById(id);
+  getOneTodo(@Param('id') id: string): Todo {
+    return this.todosService.getById(Number(id));
   }
 
   @Post()
-  addTodo(@Req() request: Request): Todo {
-    return this.todosService.add(new Todo(request.body.title));
+  addTodo(@Body('title') title: string): Todo {
+    return this.todosService.add(new Todo(title));
   }
 
   @Delete()
   deleteTodos() {
-    return this.todosService.deleteAll();
+    this.todosService.deleteAll();
+  }
+
+  @Delete(':id')
+  deleteOneTodo(@Param('id') id: string) {
+    this.todosService.deleteById(Number(id));
   }
 
   @Patch(':id')
-  modifyOneTodo(@Param('id') id: number, @Req() request: Request): Todo {
+  modifyOneTodo(@Param('id') id: string, @Req() request: Request): Todo {
     return this.todosService.updateById(
-      id,
+      Number(id),
       request.body.title,
       request.body.completed
     );
