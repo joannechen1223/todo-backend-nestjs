@@ -44,7 +44,8 @@ export class TodosController {
     @Param('id') id: string,
     @Body('title') title: string,
     @Body('completed') completed: boolean,
+    @Body('order') order: number
   ): Todo {
-    return this.todosService.updateById(Number(id), title, completed);
+    return this.todosService.updateById(Number(id), title, completed, order);
   }
 }

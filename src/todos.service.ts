@@ -35,13 +35,16 @@ export class TodosService {
     this.todos = this.todos.filter((todo) => todo !== todoToBeDeleted);
   }
 
-  updateById(id: number, title: string, completed: boolean): Todo {
+  updateById(id: number, title: string, completed: boolean, order: number): Todo {
     const todo: Todo = this.getById(id);
     if (title) {
       todo.title = title;
     }
     if (completed) {
       todo.completed = completed;
+    }
+    if (order) {
+      todo.order = order;
     }
     return todo;
   }
