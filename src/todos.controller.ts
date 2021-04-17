@@ -5,10 +5,8 @@ import {
   Delete,
   Patch,
   Body,
-  Req,
   Param,
 } from '@nestjs/common';
-import { Request } from 'express';
 import { TodosService } from './todos.service';
 import { Todo } from './model/todo.model';
 
@@ -27,8 +25,8 @@ export class TodosController {
   }
 
   @Post()
-  addTodo(@Body('title') title: string): Todo {
-    return this.todosService.add(new Todo(title));
+  addTodo(@Body('title') title: string, @Body('order') order: number): Todo {
+    return this.todosService.add(new Todo(title, order));
   }
 
   @Delete()
@@ -42,11 +40,11 @@ export class TodosController {
   }
 
   @Patch(':id')
-  modifyOneTodo(@Param('id') id: string, @Req() request: Request): Todo {
-    return this.todosService.updateById(
-      Number(id),
-      request.body.title,
-      request.body.completed
-    );
+  modifyOneTodo(
+    @Param('id') id: string,
+    @Body('title') title: string,
+    @Body('completed') completed: boolean,
+  ): Todo {
+    return this.todosService.updateById(Number(id), title, completed);
   }
 }

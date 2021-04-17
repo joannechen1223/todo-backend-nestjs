@@ -5,10 +5,10 @@ export class Todo {
   order: number;
   url: string;
 
-  constructor(title: string) {
+  constructor(title: string, order?: number) {
     this.title = title;
     this.completed = false;
-    this.order = 0;
+    this.order = order | 0;
   }
 
   setId(id: number) {

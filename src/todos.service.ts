@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { Todo } from './model/todo.model'
+import { Todo } from './model/todo.model';
 
 @Injectable()
 export class TodosService {
-  private idCounter = 0
+  private idCounter = 0;
   private todos: Todo[] = [];
 
   getAll(): any[] {
@@ -11,9 +11,9 @@ export class TodosService {
   }
 
   getById(id: number): Todo {
-    for (let todo of this.todos) {
+    for (const todo of this.todos) {
       if (todo.id === id) {
-        return todo
+        return todo;
       }
     }
     return null;
@@ -31,12 +31,12 @@ export class TodosService {
   }
 
   deleteById(id: number) {
-    let todoToBeDeleted = this.getById(id);
-    this.todos = this.todos.filter(todo => todo !== todoToBeDeleted);
+    const todoToBeDeleted = this.getById(id);
+    this.todos = this.todos.filter((todo) => todo !== todoToBeDeleted);
   }
 
   updateById(id: number, title: string, completed: boolean): Todo {
-    let todo: Todo = this.getById(id);
+    const todo: Todo = this.getById(id);
     if (title) {
       todo.title = title;
     }
