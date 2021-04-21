@@ -13,6 +13,6 @@ export class Todo {
 
   setId(id: number) {
     this.id = id;
-    this.url = 'https://todo-backend-nestjs.herokuapp.com/todos/' + id;
+    this.url = process.env.HOST_URL + '/' + id;
   }
 }

@@ -1,12 +1,9 @@
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app.module';
-
-let url = '';
+import { TodosModule } from './todos.module';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(TodosModule);
   app.enableCors(); // protection
-  await app.listen(process.env.PORT || 3000);
-  url = await app.getUrl();
+  await app.listen(process.env.PORT);
 }
 bootstrap();

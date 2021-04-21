@@ -3,18 +3,16 @@ import { Todo } from './model/todo.model';
 
 @Injectable()
 export class TodosService {
-  private idCounter = 0;
+  private idCounter: number = 0;
   private todos: Todo[] = [];
 
-  getAll(): any[] {
+  getAll(): Todo[] {
     return this.todos;
   }
 
   getById(id: number): Todo {
     for (const todo of this.todos) {
-      if (todo.id === id) {
-        return todo;
-      }
+      if (todo.id === id)   return todo;
     }
     return null;
   }
@@ -37,15 +35,9 @@ export class TodosService {
 
   updateById(id: number, title: string, completed: boolean, order: number): Todo {
     const todo: Todo = this.getById(id);
-    if (title) {
-      todo.title = title;
-    }
-    if (completed) {
-      todo.completed = completed;
-    }
-    if (order) {
-      todo.order = order;
-    }
+    if (title)  todo.title = title;
+    if (completed)  todo.completed = completed;
+    if (order)  todo.order = order;
     return todo;
   }
 }
